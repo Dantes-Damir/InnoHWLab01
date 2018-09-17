@@ -19,7 +19,7 @@ public class ContentRequest implements Runnable {
         queue = queueInstance;
     }
 
-    private static void compareWithWordsAndSave(String sentence) throws InterruptedException {
+    private static void containsWord(String sentence) throws InterruptedException {
         for (String word : words) {
             if (sentence.toLowerCase().contains(word.toLowerCase())) {
                 queue.put(sentence);
@@ -40,7 +40,7 @@ public class ContentRequest implements Runnable {
                 while ((simbol = reader.read()) != -1) {
                     char simbolChar = (char) simbol;
                     if (simbolChar == '.' || simbolChar == '!' || simbolChar == '?') {
-                        compareWithWordsAndSave(sentenceBuffer.toString());
+                        containsWord(sentenceBuffer.toString());
                         sentenceBuffer = new StringBuilder();
                     } else {
                         sentenceBuffer.append(simbolChar);
